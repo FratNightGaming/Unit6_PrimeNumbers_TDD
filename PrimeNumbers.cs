@@ -30,10 +30,10 @@ namespace PrimeNumbers
                 return primeNumbers.Count;
             //}
 
-            else
+            /*else
             {
                 return -1;
-            }
+            }*/
         }
 
         //method determines if a number is prime
