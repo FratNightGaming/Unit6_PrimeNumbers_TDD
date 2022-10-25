@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -9,69 +10,60 @@ namespace PrimeNumbers
 {
     public class PrimeNumbers
     {
-        //Fact ot Theory tells VS this method is a unit test
-        [Fact]
-        public void TestDivisbleBy3()
+        public int GetPrime(int n)
         {
-            //Arrange - setup 
-            FizzBuzz fb = new FizzBuzz();
-            string expected = "buzz";
-​
-            //Act - run your code and grab the result 
-            string actual = fb.ReturnFizzBuzz(6);
-​
-            //Assert - use a special class to compare actual vs expected and return the result 
-            Assert.Equal(expected, actual);
+            List<int> primeNumbers = new List<int>();
+
+            //if (IsPrime(n))
+            //{
+                for (int i = 1; i < n; i++)
+                {
+
+                    if (IsPrime(i))
+                    {
+                        primeNumbers.Add(i);
+
+                    }
+                }
+
+                Console.WriteLine($"{n} is index {primeNumbers.Count} in prime number list.");
+                return primeNumbers.Count;
+            //}
+
+            else
+            {
+                return -1;
+            }
         }
-​
-        [Fact]
-        public void TestDvisibleBy5()
+
+        //method determines if a number is prime
+        public bool IsPrime(int number)
         {
-            //Arrange 
-            FizzBuzz fb = new FizzBuzz();
-            string expected = "fizz";
-​
-            //Act 
-            string actual = fb.ReturnFizzBuzz(10);
-​
-            //Assert 
-            Assert.Equal(expected, actual);
-        }
-​
-        [Fact]
-        public void TestBoth()
-        {
-            //Arrange 
-            //In unit tests it is best practice to make a fresh object 
-            //each test you run, that way it starts with a blank slate 
-            //(But that only really matter if you have data in your object)
-            FizzBuzz fb = new FizzBuzz();
-            string expected = "fizzbuzz";
-​
-            //Act 
-            string actual = fb.ReturnFizzBuzz(15);
-​
-            //Assert 
-            Assert.Equal(expected, actual);
-        }
-​
-        [Fact]
-        public void TestNonDivisible()
-        {
-            //Arrange 
-            FizzBuzz fb = new FizzBuzz();
-            string expected = "";
-​
-            //Act 
-            string actual = fb.ReturnFizzBuzz(8);
-​
-            //Assert
-            Assert.Equal(expected, actual);
+            int factorCount = 0;
+            
+            for (int i = 1; i <= number; i++)
+            {
+                if (number % i == 0)
+                {
+                    factorCount++;
+                }
+            }
+
+            if (factorCount == 2)
+            {
+                Console.WriteLine($"{number} is prime.");
+                return true;
+            }
+
+            else
+            {
+                Console.WriteLine($"{number} has {factorCount} factors. Therefore, {number} is not a prime number.");
+                return false;
+            }
         }
     }
 }
-/*What will the application do?
- 
+/*
 The application locates prime numbers in a sequence (ex: 1st prime number is 2, 10th prime number is 29, etc.).
 The application prompts the user which sequenced prime they want to locate.
 The application displays the prime number and its sequence number, and prompts the user to find another prime.
